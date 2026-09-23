@@ -96,3 +96,9 @@ for (const size of [16, 32, 48, 128]) {
   writeFileSync(join(OUT, `icon${size}.png`), encodePng(size, iconPixel(size)));
   console.log(`wrote icons/icon${size}.png`);
 }
+
+// Large source for store promo tiles; not shipped in the extension package.
+const STORE = join(OUT, '..', 'store');
+mkdirSync(STORE, { recursive: true });
+writeFileSync(join(STORE, 'icon512.png'), encodePng(512, iconPixel(512)));
+console.log('wrote store/icon512.png');

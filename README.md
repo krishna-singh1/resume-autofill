@@ -80,11 +80,13 @@ events so React, Angular and Vue controlled inputs accept them (`src/core/filler
 ## Development
 
 ```
-npm test                        # 101 unit tests for the pure modules (node --test, no deps)
+npm test                        # 103 unit tests for the pure modules (node --test, no deps)
 npm run check                   # parse every script + validate manifest references
 npm run test:e2e                # 70 checks in a real headless browser against mock ATS forms
 npm run parse -- ~/resume.pdf   # run a real resume through the extension's parser and print the result
 npm run icons                   # regenerate icons/ from scripts/make-icons.mjs
+npm run package -- --verify     # build + load-test the store zip (see Publishing)
+npm run screenshots             # regenerate store images
 ```
 
 `npm run parse` is the tool to reach for when the importer gets a resume wrong: add
@@ -123,6 +125,20 @@ the generic matcher.
 
 Add a definition to `FIELD_DEFINITIONS` in `src/core/fieldmap.js` and a positive plus a
 negative label example to `tests/matcher.test.js`.
+
+## Publishing
+
+```
+# 1. bump "version" in manifest.json and package.json (the store rejects re-used versions)
+npm run package -- --verify     # checks + tests, builds dist/resume-autofill-<version>.zip, loads it in a browser
+npm run screenshots             # regenerates store/images/ from the real UI with a fictional demo profile
+```
+
+Then upload the zip at the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+Every field the dashboard asks for (description, permission justifications, data-usage
+answers, reviewer notes) is ready to paste in [store/listing.md](store/listing.md). The privacy
+policy is [docs/privacy.md](docs/privacy.md), published by GitHub Pages at
+https://krishna-singh1.github.io/resume-autofill/privacy. The same zip works for the Microsoft Edge Add-ons store.
 
 ## Known limitations
 

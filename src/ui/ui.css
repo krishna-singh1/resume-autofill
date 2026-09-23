@@ -17,6 +17,11 @@
   box-sizing: border-box;
 }
 
+/* Author `display` rules (e.g. `.row { display: flex }`) otherwise beat the UA's [hidden] rule. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   color: var(--text);

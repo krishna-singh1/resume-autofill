@@ -95,7 +95,7 @@ export function renderResume(profile) {
   if (profile.work?.length) {
     const work = section('Experience');
     for (const entry of profile.work) {
-      const block = el('article', 'entry');
+      const block = el('article', 'resume-entry');
       block.append(
         entryHeader(entry.company, entry.title, formatRange(entry.startDate, entry.endDate, entry.current), entry.location),
       );
@@ -108,7 +108,7 @@ export function renderResume(profile) {
   if (profile.projects?.length) {
     const projects = section('Projects');
     for (const project of profile.projects) {
-      const block = el('article', 'entry');
+      const block = el('article', 'resume-entry');
       block.append(entryHeader(project.name, project.description, '', project.url));
       if (project.highlights?.length) block.append(bulletList(project.highlights));
       projects.append(block);
@@ -120,7 +120,7 @@ export function renderResume(profile) {
     const education = section('Education');
     for (const entry of profile.education) {
       const degree = [entry.degree, entry.field].filter(Boolean).join(', ');
-      const block = el('article', 'entry');
+      const block = el('article', 'resume-entry');
       block.append(
         entryHeader(
           entry.school,

@@ -9,7 +9,9 @@
     "test:e2e": "node tests/e2e/run.mjs",
     "icons": "node scripts/make-icons.mjs",
     "check": "node scripts/check-syntax.mjs",
-    "parse": "node scripts/parse-file.mjs"
+    "parse": "node scripts/parse-file.mjs",
+    "package": "node scripts/package.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "engines": {
     "node": ">=20"

@@ -119,7 +119,7 @@ export class Cdp {
  * Start a headless browser with the extension loaded.
  * @returns {Promise<{cdp: Cdp, extensionId: string, serviceWorker: string, browserName: string, close: () => void}>}
  */
-export async function launchWithExtension() {
+export async function launchWithExtension({ extensionPath = ROOT, windowSize } = {}) {
   const executable = BROWSER_CANDIDATES.find((candidate) => existsSync(candidate));
   if (!executable) {
     throw new Error('No Chromium-based browser that supports --load-extension was found. Set CHROME_PATH.');
@@ -133,11 +133,12 @@ export async function launchWithExtension() {
       '--headless=new',
       `--remote-debugging-port=${debugPort}`,
       `--user-data-dir=${userDataDir}`,
-      `--load-extension=${ROOT}`,
-      `--disable-extensions-except=${ROOT}`,
+      `--load-extension=${extensionPath}`,
+      `--disable-extensions-except=${extensionPath}`,
       '--no-first-run',
       '--no-default-browser-check',
       '--disable-background-timer-throttling',
+      ...(windowSize ? [`--window-size=${windowSize}`, '--force-device-scale-factor=1', '--hide-scrollbars'] : []),
       'about:blank',
     ],
     { stdio: 'ignore' },

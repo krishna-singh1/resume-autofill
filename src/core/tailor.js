@@ -7,6 +7,13 @@
 
 import { normalize } from './text.js';
 
+/**
+ * normalize() splits camelCase, which is right for field names like
+ * `firstName` but wrong for prose: it turns PostgreSQL into "postgre sql" and
+ * gRPC into "g rpc". Lowercasing first keeps those as single words.
+ */
+const words = (text) => normalize(String(text || '').toLowerCase()).split(' ').filter(Boolean);
+
 const STOPWORDS = new Set([
   'the', 'and', 'for', 'you', 'our', 'with', 'this', 'that', 'are', 'will', 'have', 'has', 'from', 'your',
   'who', 'not', 'but', 'all', 'can', 'was', 'were', 'been', 'their', 'they', 'them', 'its', 'his', 'her',
@@ -26,7 +33,7 @@ const STOPWORDS = new Set([
  */
 export function extractKeywords(jobText, limit = 40) {
   const counts = new Map();
-  for (const token of normalize(jobText).split(' ')) {
+  for (const token of words(jobText)) {
     if (token.length < 2 || STOPWORDS.has(token) || /^\d+$/.test(token)) continue;
     counts.set(token, (counts.get(token) || 0) + 1);
   }
@@ -38,7 +45,7 @@ export function extractKeywords(jobText, limit = 40) {
 
 /** How many distinct keywords appear in `text`. */
 export function scoreText(text, keywords) {
-  const tokens = new Set(normalize(text).split(' '));
+  const tokens = new Set(words(text));
   return keywords.reduce((score, keyword) => score + (tokens.has(keyword) ? 1 : 0), 0);
 }
 
@@ -81,7 +88,7 @@ export function tailorProfile(profile, jobText, { maxBullets = 0 } = {}) {
     (profile.projects || []).map((project) => `${project.name} ${project.description}`).join(' '),
   ].join(' ');
 
-  const present = new Set(normalize(haystack).split(' '));
+  const present = new Set(words(haystack));
   const matched = keywords.filter((keyword) => present.has(keyword));
   const missing = keywords.filter((keyword) => !present.has(keyword));
 

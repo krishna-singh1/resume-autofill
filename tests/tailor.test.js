@@ -71,3 +71,18 @@ describe('tailorProfile', () => {
     assert.equal(untouched.coverage, 0);
   });
 });
+
+describe('mixed-case technology names', () => {
+  it('keeps PostgreSQL, gRPC and JavaScript as single keywords', () => {
+    const keywords = extractKeywords('PostgreSQL and gRPC services in JavaScript. PostgreSQL again.');
+    assert.ok(keywords.includes('postgresql'), keywords.join(','));
+    assert.ok(keywords.includes('grpc'));
+    assert.ok(keywords.includes('javascript'));
+    assert.ok(!keywords.includes('sql') && !keywords.includes('rpc') && !keywords.includes('script'));
+  });
+
+  it('matches them in the profile', () => {
+    const result = tailorProfile({ skills: ['PostgreSQL'], work: [], projects: [] }, 'PostgreSQL experience');
+    assert.deepEqual(result.missing, []);
+  });
+});
