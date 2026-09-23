@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Resume Autofill</title>
+    <link rel="stylesheet" href="ui.css" />
+  </head>
+  <body class="popup">
+    <header>
+      <h1>Resume Autofill</h1>
+      <span class="muted" id="site"></span>
+    </header>
+
+    <main>
+      <div id="status">Loading profile…</div>
+
+      <div class="actions">
+        <button id="fill" class="primary">Fill this page</button>
+        <div class="row">
+          <button id="preview">Preview matches</button>
+          <button id="collect">Remember answers here</button>
+        </div>
+      </div>
+
+      <section id="remember" class="remember" hidden>
+        <h3>Remember these answers?</h3>
+        <p class="muted">Ticked answers are reused on any future form that asks the same question.</p>
+        <ul id="remember-list"></ul>
+        <div class="row">
+          <button id="remember-save" class="primary">Remember</button>
+          <button id="remember-dismiss">Not now</button>
+        </div>
+      </section>
+
+      <ul id="results"></ul>
+    </main>
+
+    <footer>
+      <a href="#" id="open-options">Edit profile</a>
+      <a href="#" id="open-resume">Build resume</a>
+    </footer>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

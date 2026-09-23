@@ -1,0 +1,200 @@
+/* Builder chrome (screen only) ------------------------------------------- */
+
+.builder {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  min-height: 100vh;
+}
+
+.builder-panel {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.builder-panel h3 {
+  margin: 22px 0 6px;
+}
+
+.panel-actions {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.builder-preview {
+  background: #eef2f7;
+  padding: 28px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.coverage {
+  margin-top: 14px;
+  font-size: 12px;
+}
+
+.coverage .bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+  margin: 6px 0 8px;
+}
+
+.coverage .bar span {
+  display: block;
+  height: 100%;
+  background: var(--good);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 11px;
+}
+
+.chip.missing {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: var(--warn);
+}
+
+/* The resume document ------------------------------------------------------
+   Sized to US Letter with 0.5in margins. Deliberately plain: single column,
+   no tables, no icons — the layouts that resume parsers read reliably. */
+
+.paper {
+  display: block;
+  width: 8.5in;
+  min-height: 11in;
+  margin: 0 auto;
+  padding: 0.5in 0.6in;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.14);
+  color: #111;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 10.5pt;
+  line-height: 1.38;
+}
+
+.resume-header {
+  text-align: center;
+  border-bottom: 1.5px solid #111;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.resume-name {
+  font-size: 22pt;
+  letter-spacing: 0.02em;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.resume-contact {
+  font-size: 9.5pt;
+  color: #333;
+  word-break: break-word;
+}
+
+.resume-section {
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 11pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 0.75px solid #999;
+  padding-bottom: 2px;
+  margin: 0 0 6px;
+}
+
+.entry {
+  margin-bottom: 9px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.entry-primary {
+  font-weight: 700;
+}
+
+.entry-secondary {
+  font-style: italic;
+}
+
+.entry-right {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 9.5pt;
+  color: #333;
+}
+
+.entry-location {
+  font-style: italic;
+}
+
+.bullets {
+  margin: 3px 0 0;
+  padding-left: 18px;
+}
+
+.bullets li {
+  margin-bottom: 2px;
+}
+
+.summary-text,
+.skills-text {
+  margin: 0;
+}
+
+/* Print: the document only ------------------------------------------------ */
+
+@page {
+  size: letter;
+  margin: 0.5in;
+}
+
+@media print {
+  .builder {
+    display: block;
+  }
+
+  .builder-panel {
+    display: none;
+  }
+
+  .builder-preview {
+    background: none;
+    padding: 0;
+    overflow: visible;
+    max-height: none;
+  }
+
+  .paper {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}

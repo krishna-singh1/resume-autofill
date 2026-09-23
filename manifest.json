@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Resume Autofill",
+  "version": "0.1.0",
+  "description": "Fill job application forms from your saved resume profile, and generate a tailored resume PDF.",
+  "minimum_chrome_version": "116",
+  "permissions": ["storage", "scripting", "activeTab", "unlimitedStorage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Resume Autofill",
+    "default_popup": "src/ui/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "src/ui/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "fill-form": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Fill the application form on this page"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content/*.js", "src/core/*.js"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}

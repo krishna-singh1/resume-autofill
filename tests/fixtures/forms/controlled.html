@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Controlled inputs (React-style value tracker)</title>
+</head>
+<body>
+  <!--
+    Simulates how React tracks controlled inputs: it wraps the node's `value`
+    property to remember the last value it saw, and ignores input events whose
+    value "hasn't changed". A naive `el.value = x` followed by dispatchEvent is
+    silently dropped by this pattern; the extension must go through the native
+    setter for the state to update.
+  -->
+  <form onsubmit="return false">
+    <label for="first">First name</label>
+    <input id="first" name="firstName" data-state="" />
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" data-state="" />
+    <label for="about">Professional summary</label>
+    <textarea id="about" name="summary" data-state=""></textarea>
+  </form>
+
+  <script>
+    for (const el of document.querySelectorAll('input, textarea')) {
+      const proto = el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+      const native = Object.getOwnPropertyDescriptor(proto, 'value');
+      let tracked = el.value;
+
+      Object.defineProperty(el, 'value', {
+        configurable: true,
+        get() { return native.get.call(el); },
+        set(next) { tracked = String(next); native.set.call(el, next); },
+      });
+
+      el.addEventListener('input', () => {
+        const current = native.get.call(el);
+        if (current === tracked) return; // React: "no change", drop it
+        tracked = current;
+        el.dataset.state = current;      // React: setState -> re-render
+      });
+    }
+  </script>
+</body>
+</html>

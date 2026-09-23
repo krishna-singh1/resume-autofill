@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Resume Autofill — profile</title>
+    <link rel="stylesheet" href="ui.css" />
+  </head>
+  <body>
+    <div class="toolbar">
+      <h1>Your profile</h1>
+      <div class="row">
+        <span class="save-state" id="save-state"></span>
+        <button id="save" class="primary">Save</button>
+        <button id="open-resume">Build resume</button>
+        <button id="export">Export</button>
+        <button id="import">Import</button>
+        <button id="clear" class="danger">Clear all</button>
+      </div>
+    </div>
+
+    <div class="options">
+      <section>
+        <h2>Start from an existing resume</h2>
+        <p class="muted">
+          Reads a PDF, Word (.docx) or text file and pre-fills the fields below. Parsing is a best guess —
+          nothing is saved until you review it and press Save.
+        </p>
+        <div class="dropzone" id="dropzone">
+          Drop a resume here, or <button id="pick-file" type="button">choose a file</button>
+          <input type="file" id="resume-file" accept=".pdf,.docx,.txt,.md,text/plain" hidden />
+        </div>
+        <div id="parse-status" class="muted"></div>
+        <div class="row" id="parse-actions" hidden>
+          <button id="apply-parsed" class="primary">Use these details</button>
+          <button id="discard-parsed">Discard</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Basics</h2>
+        <div class="grid-3">
+          <label class="field"><span>First name</span><input type="text" data-path="basics.firstName" /></label>
+          <label class="field"><span>Last name</span><input type="text" data-path="basics.lastName" /></label>
+          <label class="field"><span>Preferred name</span><input type="text" data-path="basics.preferredName" /></label>
+        </div>
+        <div class="grid-3">
+          <label class="field"><span>Email</span><input type="email" data-path="basics.email" /></label>
+          <label class="field"><span>Phone</span><input type="tel" data-path="basics.phone" /></label>
+          <label class="field"><span>Pronouns</span><input type="text" data-path="basics.pronouns" /></label>
+        </div>
+        <label class="field"><span>Street address</span><input type="text" data-path="basics.addressLine1" /></label>
+        <div class="grid-3">
+          <label class="field"><span>City</span><input type="text" data-path="basics.city" /></label>
+          <label class="field"><span>State / province</span><input type="text" data-path="basics.state" /></label>
+          <label class="field"><span>Postal code</span><input type="text" data-path="basics.postalCode" /></label>
+        </div>
+        <label class="field"><span>Country</span><input type="text" data-path="basics.country" /></label>
+        <label class="field">
+          <span>Professional summary</span>
+          <textarea data-path="basics.summary" rows="4"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>Links</h2>
+        <div class="grid-2">
+          <label class="field"><span>LinkedIn</span><input type="url" data-path="links.linkedin" /></label>
+          <label class="field"><span>GitHub</span><input type="url" data-path="links.github" /></label>
+          <label class="field"><span>Portfolio / website</span><input type="url" data-path="links.portfolio" /></label>
+          <label class="field"><span>Twitter / X</span><input type="url" data-path="links.twitter" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Work experience</h2>
+        <p class="muted">Most recent first — forms asking for your "current" employer are filled from the top entry.</p>
+        <div data-list="work"></div>
+        <button data-add="work">Add role</button>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <p class="muted">Most recent first.</p>
+        <div data-list="education"></div>
+        <button data-add="education">Add school</button>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div data-list="projects"></div>
+        <button data-add="projects">Add project</button>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <label class="field">
+          <span>Comma separated</span>
+          <textarea id="skills" rows="3" placeholder="Python, PostgreSQL, Kubernetes"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>Common application answers</h2>
+        <div class="grid-3">
+          <label class="field"><span>Desired salary</span><input type="text" data-path="application.desiredSalary" /></label>
+          <label class="field"><span>Available start date</span><input type="text" data-path="application.availableStartDate" placeholder="2026-09-01" /></label>
+          <label class="field"><span>Notice period</span><input type="text" data-path="application.noticePeriod" placeholder="30 days" /></label>
+        </div>
+        <div class="grid-3">
+          <label class="field">
+            <span>Willing to relocate</span>
+            <select data-path="application.willingToRelocate" data-choices="yesno"></select>
+          </label>
+          <label class="field">
+            <span>Willing to travel</span>
+            <select data-path="application.willingToTravel" data-choices="yesno"></select>
+          </label>
+          <label class="field"><span>Years of experience</span><input type="text" data-path="application.yearsOfExperience" placeholder="auto" /></label>
+        </div>
+        <label class="field"><span>How did you hear about us</span><input type="text" data-path="application.howHeard" /></label>
+        <label class="field">
+          <span>Default cover letter</span>
+          <textarea data-path="application.coverLetter" rows="5"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>Work authorisation</h2>
+        <div class="grid-3">
+          <label class="field">
+            <span>Authorised to work</span>
+            <select data-path="workAuth.authorized" data-choices="yesno"></select>
+          </label>
+          <label class="field">
+            <span>Requires sponsorship</span>
+            <select data-path="workAuth.requiresSponsorship" data-choices="yesno"></select>
+          </label>
+          <label class="field"><span>Visa / work permit status</span><input type="text" data-path="workAuth.visaStatus" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Voluntary self-identification</h2>
+        <p class="muted">
+          These questions are optional on applications, and filling them is switched off by default.
+          Leave them blank to skip them entirely.
+        </p>
+        <div class="grid-3">
+          <label class="field"><span>Gender</span><input type="text" data-path="eeo.gender" /></label>
+          <label class="field"><span>Hispanic or Latino</span><select data-path="eeo.hispanicLatino" data-choices="yesno"></select></label>
+          <label class="field"><span>Race / ethnicity</span><input type="text" data-path="eeo.race" /></label>
+        </div>
+        <div class="grid-2">
+          <label class="field"><span>Veteran status</span><input type="text" data-path="eeo.veteranStatus" /></label>
+          <label class="field"><span>Disability status</span><input type="text" data-path="eeo.disabilityStatus" /></label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Files to attach</h2>
+        <div class="grid-2">
+          <div>
+            <h3>Resume</h3>
+            <div id="resume-slot" class="muted"></div>
+            <div class="row">
+              <button id="set-resume">Choose resume file</button>
+              <button id="remove-resume" class="danger">Remove</button>
+              <input type="file" id="resume-upload" accept=".pdf,.doc,.docx" hidden />
+            </div>
+          </div>
+          <div>
+            <h3>Cover letter</h3>
+            <div id="cover-slot" class="muted"></div>
+            <div class="row">
+              <button id="set-cover">Choose cover letter file</button>
+              <button id="remove-cover" class="danger">Remove</button>
+              <input type="file" id="cover-upload" accept=".pdf,.doc,.docx" hidden />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Remembered answers</h2>
+        <p class="muted">
+          Answers you gave to questions your profile could not cover. Each is reused on any form asking the
+          same question, unless it is scoped to one site. Edit a value inline; changes save immediately.
+        </p>
+        <div id="learned-list"></div>
+        <div class="row">
+          <span class="muted" id="learned-empty">Nothing remembered yet. After filling a form, answer the leftover
+            questions and the popup will offer to remember them.</span>
+          <button id="learned-clear" class="danger" hidden>Forget all</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Behaviour</h2>
+        <label class="check">
+          <input type="checkbox" data-setting="overwriteExisting" />
+          <span>Overwrite fields that already have a value</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-setting="useLearnedAnswers" />
+          <span>Fill from remembered answers</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-setting="offerToRemember" />
+          <span>After filling, offer to remember answers I type into leftover fields</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-setting="attachResume" />
+          <span>Attach my resume file to upload fields</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-setting="fillEEO" />
+          <span>Answer voluntary self-identification questions</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-setting="highlightFilled" />
+          <span>Briefly highlight fields after filling them</span>
+        </label>
+      </section>
+
+      <input type="file" id="import-file" accept="application/json,.json" hidden />
+    </div>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

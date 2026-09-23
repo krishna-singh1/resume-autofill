@@ -1,0 +1,34 @@
+Arjun Mehta
+  +91-9876543210 # arjun.mehta@example.com ï arjun-mehta § arjunm Ð leetcode/arjunm
+Summary
+Backend Engineer with 6+ years of experience building scalable distributed systems, microservices, and event-driven
+architectures at scale.
+Technical Skills
+Languages: Java, Python, SQL
+Cloud & DevOps: AWS (IoT Core, Lambda, S3, EC2, Rule Engine), Docker, Kubernetes, Jenkins, Git, CI/CD
+Architecture & Design: Domain-Driven Design (DDD), Multi-Tenant Systems
+Professional Experience
+Caizin   Aug 2024 – Present
+Senior Software Engineer 2   Pune, India
+• Architected and developed a multi-tenant, event-driven analytics platform processing 15M+ records/day, powering
+automated reporting and insights for 10+ enterprise customers
+• Optimized service architecture and asynchronous processing flows, reducing end-to-end processing time by 40% and
+improving system throughput by 3x through efficient data modeling and caching strategies
+• Tech Stack: Java, Spring Boot, Kafka, MongoDB
+Paytm   Sep 2021 – Aug 2024
+Senior Software Engineer   Noida, India
+• Engineered a real-time metrics and health monitoring system for 7M+ IoT devices, improving issue detection by 85%
+and reducing device downtime by 30% through proactive alerting and diagnostics
+• Led end-to-end design, development, and deployment of Bluetooth-enabled IoT device supporting music playback and
+real-time transaction broadcasts, onboarding 500K+ devices within 6 months
+Tavisca Solutions (A Division of JPMorgan Chase)   Jun 2019 – Jun 2021
+Software Developer   Pune, India
+• Designed and developed a Customer Engagement and Loyalty platform with personalized offer recommendations.
+Awards & Recognition
+Rockstar Award - Paytm (2023): Recognized for exceptional performance in optimizing IoT infrastructure
+Rising Star Award - Paytm (2022): Awarded for innovative solutions.
+Education
+Lovely Professional University   Phagwara, Punjab
+Bachelor of Technology (Hons.) in Computer Science and Engineering   May 2019
+
+Links: arjun.mehta@example.com  https://linkedin.com/in/arjun-mehta  https://github.com/arjunm  https://leetcode.com/arjunm

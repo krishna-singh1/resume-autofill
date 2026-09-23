@@ -1,0 +1,35 @@
+Priya Raman
+San Francisco, CA  |  (415) 555-0142  |  priya.raman@example.com
+linkedin.com/in/priyaraman  |  github.com/priyar  |  priyaraman.dev
+
+SUMMARY
+Backend engineer with 7 years building payment and ledger systems at scale. Led migration of a monolith to event-driven services handling 40k TPS.
+
+EXPERIENCE
+
+Senior Software Engineer | Stripe | Jan 2021 – Present
+• Designed idempotent ledger service in Go processing $2B/day with 99.99% availability
+• Cut p99 latency 45% by moving hot paths from PostgreSQL to Redis streams
+• Mentored 4 engineers; ran the on-call rotation for payments infra
+
+Software Engineer, Square
+Mar 2018 – Dec 2020
+- Built Kafka-based reconciliation pipeline replacing nightly batch jobs
+- Shipped merchant payout API used by 120k sellers
+
+Software Engineer Intern — Shopify (May 2017 – Aug 2017)
+- Prototyped fraud-scoring features in Python; two shipped to production
+
+EDUCATION
+University of California, Berkeley
+B.S. in Computer Science, 2014 – 2018
+GPA: 3.8/4.0
+
+SKILLS
+Languages: Go, Python, TypeScript, SQL
+Infrastructure: Kubernetes, Kafka, PostgreSQL, Redis, Terraform, AWS
+Practices: Distributed systems, Observability, Incident response
+
+PROJECTS
+ledgerlite — github.com/priyar/ledgerlite
+• Double-entry ledger library with 1.2k stars
